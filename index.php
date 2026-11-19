@@ -3,6 +3,9 @@ require_once __DIR__ .'/includes/cabecalho.php';
 require './config/conexao.php';
 ?>
 
+
+
+
 <main>
     <!-- Hero banner -->
     <section class="hero">
