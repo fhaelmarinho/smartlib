@@ -1,12 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex&family=Inder&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-/* ===========================
-   DESIGN TOKENS
-=========================== */
+
 :root {
     --mainblue:    #355079;
-    --accentgreen: #9BBF3A;
+    --accentgreen: #13cf45;
     --offwhite:    #FAF9F6;
     --text-dark:   #1a1a1a;
     --text-muted:  #555;
@@ -16,9 +14,7 @@
     --shadow:      0 2px 8px rgba(0,0,0,.12);
 }
 
-/* ===========================
-   RESET / BASE
-=========================== */
+/* reset */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -45,9 +41,7 @@ img {
     max-width: 100%;
 }
 
-/* ===========================
-   HEADER / NAV
-=========================== */
+/* header e nav */
 .site-header {
     background-color: var(--mainblue);
     display: flex;
@@ -201,9 +195,7 @@ main {
     filter: brightness(1.1);
 }
 
-/* ===========================
-   BOOK RESULT CARD
-=========================== */
+/* Book section */
 .result-section {
     padding: 0 7% 48px;
 }
@@ -215,7 +207,7 @@ main {
 }
 
 .book-title {
-    font-size: 16px;
+    font-size: 22px;
     font-weight: 700;
     color: var(--text-dark);
     margin-bottom: 20px;
@@ -269,4 +261,98 @@ main {
 
 .footer a:hover {
     color: #fff;
+}
+
+
+.form-section {
+    padding: 48px 7%;
+}
+
+.form-wrapper {
+    max-width: 420px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    box-shadow: var(--shadow);
+}
+
+.form-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--mainblue);
+    margin-bottom: 24px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.auth-form label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 2px;
+}
+
+.auth-form small {
+    font-weight: 400;
+    color: var(--text-muted);
+}
+
+.auth-form input {
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color .2s;
+}
+
+.auth-form input:focus {
+    border-color: var(--mainblue);
+}
+
+.auth-form .btn-search {
+    margin-top: 6px;
+    width: 100%;
+}
+
+.form-link {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 18px;
+}
+
+.form-link a {
+    color: var(--mainblue);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* Mensagens de feedback */
+.msg-erro {
+    background: #fdecea;
+    color: #b00020;
+    border: 1px solid #f5c6cb;
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+.msg-ok {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-size: 13px;
+    margin-bottom: 16px;
 }

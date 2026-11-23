@@ -62,15 +62,15 @@ require __DIR__ . '/includes/cabecalho.php';
 
             <?php if (empty($livros)): ?>
                 <p class="no-results">
-                    Nenhum livro encontrado para "<strong><?= e($argumento_de_busca) ?></strong>".
+                    Nenhum livro encontrado para '<strong><?= e($argumento_de_busca) ?></strong>'.
                 </p>
 
             <?php else: ?>
-                <p class="result-count"><?= count($livros) ?> resultado(s) encontrado(s)</p>
+                <p class="result-count"><b><?= count($livros) ?></b> resultado(s) encontrado(s)</p>
 
                 <?php foreach ($livros as $livro): ?>
                 <div class="book-card">
-                    <h2 class="book-title"><?= e($livro['titulo']) ?></h2>
+                    <h2 class="book-title"><?= e($livro['titulo'])?> <small><em><?= '('. ($livro['ano_publicacao']) .')' ?></em></small></h2>
                     <dl class="book-meta">
                         <dt>Autor:</dt> <dd><?= e($livro['autor']) ?></dd>
                         <dt>Editora:</dt>  <dd><?= e($livro['editora']) ?></dd>
@@ -83,13 +83,13 @@ require __DIR__ . '/includes/cabecalho.php';
                     </dl>
                 </div>
                 <?php endforeach; ?>
-
             <?php endif; ?>
         </div>
     </section>
     <?php endif; ?>
 
 </main>
+
 <?php
 require_once __DIR__ .'/includes/rodape.php';
 ?>
