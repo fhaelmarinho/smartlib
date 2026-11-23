@@ -50,7 +50,9 @@ require __DIR__ . '/includes/cabecalho.php';
                     id="busca"
                     placeholder="Digite a sua pesquisa por Título ou Autor..."
                 >
-                <button class="btn-search" type="submit">Pesquisar</button>
+                <button class="btn-search" type="submit">
+                    <img src="/asset/img/lupa.png" alt="Pesquisar" class="icon-lupa"><span>Pesquisa</span>
+                </button>
             </form>
         </div>
     </section>

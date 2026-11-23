@@ -121,7 +121,7 @@ main {
     background-color: var(--search-bg);
     border-radius: var(--radius);
     padding: 24px 28px;
-    max-width: 760px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
@@ -189,6 +189,16 @@ main {
     cursor: pointer;
     white-space: nowrap;
     transition: filter .2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.icon-lupa{
+    height: 22px;
+    width: 22px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
 }
 
 .btn-search:hover {
@@ -356,3 +366,4 @@ main {
     font-size: 13px;
     margin-bottom: 16px;
 }
+
