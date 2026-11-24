@@ -10,13 +10,13 @@ $categorias = $pdo->query('SELECT id, nome FROM categorias ORDER BY nome ASC')->
 // Verifica se é edição de um livro existente
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $livro = [
-    'titulo'                => '',
-    'autor'                 => '',
-    'editora'               => '',
-    'isbn'                  => '',
-    'classificacao'         => '',
-    'categoria_id'          => '',
-    'ano_publicacao'        => '',
+    'titulo'  => '',
+    'autor' => '',
+    'editora' => '',
+    'isbn' => '',
+    'classificacao' => '',
+    'categoria_id' => '',
+    'ano_publicacao' => '',
     'quantidade_disponivel' => 1,
 ];
 $modoEdicao = false;
@@ -42,24 +42,24 @@ $erro = '';
 
 // Processamento do formulário
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $titulo        = trim($_POST['titulo'] ?? '');
-    $autor         = trim($_POST['autor'] ?? '');
-    $editora       = trim($_POST['editora'] ?? '');
-    $isbn          = trim($_POST['isbn'] ?? '');
+    $titulo = trim($_POST['titulo'] ?? '');
+    $autor = trim($_POST['autor'] ?? '');
+    $editora = trim($_POST['editora'] ?? '');
+    $isbn = trim($_POST['isbn'] ?? '');
     $classificacao = trim($_POST['classificacao'] ?? '');
     $categoria_id  = filter_input(INPUT_POST, 'categoria_id', FILTER_VALIDATE_INT) ?: null;
-    $ano           = trim($_POST['ano_publicacao'] ?? '');
-    $quantidade    = filter_input(INPUT_POST, 'quantidade_disponivel', FILTER_VALIDATE_INT);
+    $ano = trim($_POST['ano_publicacao'] ?? '');
+    $quantidade = filter_input(INPUT_POST, 'quantidade_disponivel', FILTER_VALIDATE_INT);
 
     // Mantém os dados preenchidos no formulário se houver erro
     $livro = [
-        'titulo'                => $titulo,
-        'autor'                 => $autor,
-        'editora'               => $editora,
-        'isbn'                  => $isbn,
-        'classificacao'         => $classificacao,
-        'categoria_id'          => $categoria_id,
-        'ano_publicacao'        => $ano,
+        'titulo' => $titulo,
+        'autor' => $autor,
+        'editora' => $editora,
+        'isbn' => $isbn,
+        'classificacao' => $classificacao,
+        'categoria_id'  => $categoria_id,
+        'ano_publicacao'  => $ano,
         'quantidade_disponivel' => $quantidade ?? 1,
     ];
 
@@ -84,18 +84,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     WHERE id = :id
                 ');
                 $stmt->execute([
-                    ':titulo'        => $titulo,
-                    ':autor'         => $autor,
-                    ':editora'       => $editora,
-                    ':isbn'          => $isbn,
+                    ':titulo' => $titulo,
+                    ':autor' => $autor,
+                    ':editora' => $editora,
+                    ':isbn' => $isbn,
                     ':classificacao' => $classificacao,
-                    ':categoria_id'  => $categoria_id,
-                    ':ano'           => $ano,
-                    ':qtd'           => $quantidade,
-                    ':id'            => $id,
+                    ':categoria_id' => $categoria_id,
+                    ':ano' => $ano,
+                    ':qtd' => $quantidade,
+                    ':id' => $id,
                 ]);
 
-                // Se a quantidade aumentou, gera os novos exemplares adicionais
+                // Se a quantidade aumentou, gera os novos exemplares adicionais 
                 $stmtQtdEx = $pdo->prepare('SELECT COUNT(*) FROM exemplares WHERE livro_id = :id');
                 $stmtQtdEx->execute([':id' => $id]);
                 $qtdAtualEx = (int)$stmtQtdEx->fetchColumn();
@@ -123,19 +123,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     VALUES (:titulo, :autor, :editora, :isbn, :classificacao, :categoria_id, :ano, :qtd)
                 ');
                 $stmt->execute([
-                    ':titulo'        => $titulo,
-                    ':autor'         => $autor,
-                    ':editora'       => $editora,
-                    ':isbn'          => $isbn,
+                    ':titulo' => $titulo,
+                    ':autor' => $autor,
+                    ':editora' => $editora,
+                    ':isbn' => $isbn,
                     ':classificacao' => $classificacao,
-                    ':categoria_id'  => $categoria_id,
-                    ':ano'           => $ano,
-                    ':qtd'           => $quantidade,
+                    ':categoria_id' => $categoria_id,
+                    ':ano' => $ano,
+                    ':qtd' => $quantidade,
                 ]);
 
                 $livroId = (int)$pdo->lastInsertId();
 
-                // Gera automaticamente os códigos únicos para cada exemplar (LIV001-EX01...)
+                // Gera automaticamente os registro únicos para cada exemplar (LIV001-EX01...)
                 $idFormatado = str_pad($livroId, 3, '0', STR_PAD_LEFT);
                 $stmtNovoEx = $pdo->prepare('
                     INSERT INTO exemplares (livro_id, codigo_exemplar, status)

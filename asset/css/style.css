@@ -387,6 +387,12 @@ main {
     flex-wrap: wrap;
 }
 
+.admin-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .saudacao {
     color: var(--text-muted);
     font-size: 14px;
@@ -514,6 +520,28 @@ main {
 }
 
 .btn-adicionar:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+/* Botão Emprestar Livro */
+.btn-emprestar {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #0919ad;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    transition: filter 0.2s, transform 0.1s;
+}
+
+.btn-emprestar:hover {
     filter: brightness(1.1);
     transform: translateY(-1px);
 }

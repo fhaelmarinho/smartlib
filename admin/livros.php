@@ -10,7 +10,7 @@ if ($busca !== '') {
     $like = '%' . $busca . '%';
     $stmt = $pdo->prepare('
         SELECT l.*, c.nome AS categoria,
-               GROUP_CONCAT(e.codigo_exemplar ORDER BY e.id SEPARATOR ", ") AS codigos_exemplares
+        GROUP_CONCAT(e.codigo_exemplar ORDER BY e.id SEPARATOR ", ") AS codigos_exemplares
         FROM livros l
         LEFT JOIN categorias c ON c.id = l.categoria_id
         LEFT JOIN exemplares e ON e.livro_id = l.id
@@ -25,18 +25,18 @@ if ($busca !== '') {
         ORDER BY l.titulo ASC
     ');
     $stmt->execute([
-        ':b_titulo'  => $like,
-        ':b_autor'   => $like,
+        ':b_titulo' => $like,
+        ':b_autor' => $like,
         ':b_editora' => $like,
-        ':b_isbn'    => $like,
-        ':b_class'   => $like,
-        ':b_cat'     => $like,
-        ':b_cod'     => $like,
+        ':b_isbn' => $like,
+        ':b_class' => $like,
+        ':b_cat' => $like,
+        ':b_cod' => $like,
     ]);
 } else {
     $stmt = $pdo->prepare('
         SELECT l.*, c.nome AS categoria,
-               GROUP_CONCAT(e.codigo_exemplar ORDER BY e.id SEPARATOR ", ") AS codigos_exemplares
+        GROUP_CONCAT(e.codigo_exemplar ORDER BY e.id SEPARATOR ", ") AS codigos_exemplares
         FROM livros l
         LEFT JOIN categorias c ON c.id = l.categoria_id
         LEFT JOIN exemplares e ON e.livro_id = l.id
@@ -58,7 +58,10 @@ require_once __DIR__ . '/../includes/cabecalho.php';
                 <h1>Administração de Livros</h1>
                 <p class="saudacao">Olá, <strong><?= e($_SESSION['usuario_nome'] ?? '') ?></strong></p>
             </div>
-            <a class="btn-adicionar" href="formulario.php">+ Adicionar Livro</a>
+            <div class="admin-actions">
+                <a class="btn-emprestar" href="emprestar.php">Emprestar Livro</a>
+                <a class="btn-adicionar" href="formulario.php">+ Adicionar Livro</a>
+            </div>
         </div>
 
         <!-- Barra de Filtro / Busca -->
@@ -121,9 +124,9 @@ require_once __DIR__ . '/../includes/cabecalho.php';
                             <td class="col-acoes">
                                 <a href="formulario.php?id=<?= $l['id'] ?>" class="btn-acao btn-editar">Editar</a>
                                 <a href="excluir.php?id=<?= $l['id'] ?>" 
-                                   class="btn-acao btn-excluir" 
-                                   onclick="return confirm('Tem certeza que deseja excluir o livro \'<?= e(addslashes($l['titulo'])) ?>\'?');">
-                                   Excluir
+                                    class="btn-acao btn-excluir" 
+                                    onclick="return confirm('Tem certeza que deseja excluir o livro \'<?= e(addslashes($l['titulo'])) ?>\'?');">
+                                    Excluir
                                 </a>
                             </td>
                         </tr>
