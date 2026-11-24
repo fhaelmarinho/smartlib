@@ -1,5 +1,5 @@
 <?php
-$env = parse_ini_file(__DIR__ . '/.env');
+$env = parse_ini_file(__DIR__ . '/../.env');
 
 if ($env === false) {
     die('Erro ao carregar configurações do ambiente.');
@@ -19,4 +19,5 @@ try {
 } catch (PDOException $e) {
     die('Erro de conexão com o banco de dados.');
 }
-unset($host, $dbname, $dbusuario, $dbsenha);
+
+unset($env);
