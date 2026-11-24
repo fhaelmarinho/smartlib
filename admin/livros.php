@@ -59,8 +59,8 @@ require_once __DIR__ . '/../includes/cabecalho.php';
                 <p class="saudacao">Olá, <strong><?= e($_SESSION['usuario_nome'] ?? '') ?></strong></p>
             </div>
             <div class="admin-actions">
-                <a class="btn-emprestar" href="emprestar.php">Emprestar Livro</a>
-                <a class="btn-adicionar" href="formulario.php">+ Adicionar Livro</a>
+                <a class="btn-emprestar" href="emprestar.php">-> Emprestar Livro</a>
+                <a class="btn-adicionar" href="formulario.php">+ Cadastrar Livro</a>
             </div>
         </div>
 
