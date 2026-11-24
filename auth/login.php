@@ -1,14 +1,18 @@
 <?php
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+
 require_once __DIR__ . '/../config/conexao.php';
 require_once __DIR__ . '/../includes/funcoes.php';
 
 $erro = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = trim($_POST['email']?? '');
+    $email = trim($_POST['email'] ?? '');
     $senha = $_POST['senha'] ?? '';
 
-    if ($email === '' OR $senha === '') {
+    if ($email === '' || $senha === '') {
         $erro = 'Preencha e-mail e senha.';
     } else {
         // Busca o usuário pelo e-mail
@@ -17,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $usuario = $stmt->fetch();
 
         // Verifica se existe e se a senha confere com o hash
-        if (!$usuario OR !password_verify($senha, $usuario['senha'])) {
+        if (!$usuario || !password_verify($senha, $usuario['senha'])) {
             $erro = 'E-mail ou senha incorretos.';
         } else {
             // ── Login bem-sucedido: salva dados na sessão ──
@@ -25,11 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['usuario_nome'] = $usuario['nome'];
             $_SESSION['usuario_tipo'] = $usuario['tipo'];
 
-            // E o acesso não for de bibliotecario retorna para o index, caso seja bibliotecario (admin) vai para a administracao dos livros
+            // Se for bibliotecário vai para a administração, senão para a home
             if ($usuario['tipo'] === 'bibliotecario') {
-                header('Location: ../admin/livros.php');
+                header('Location: /admin/livros.php');
             } else {
-                header('Location: ../index.php');
+                header('Location: /index.php');
             }
             exit;
         }

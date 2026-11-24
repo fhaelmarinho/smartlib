@@ -13,20 +13,19 @@ function exigirLogin(): void
         session_start();
     }
 
-    if (!isset($_SESSION['usuarios_id'])) {
-        header('Location: ../login.php');
+    if (!isset($_SESSION['usuario_id'])) {
+        header('Location: /auth/login.php');
         exit;
     }
 }
 
-// Exige uma sessão autenticada com perfil de administrador.
-function exigirAdmin(): void
+// Exige uma sessão autenticada com perfil de bibliotecário.
+function exigirBibliotecario(): void
 {
     exigirLogin();
 
-    if (($_SESSION['e_admin'] ?? '') !== 'admin') {
-        // Um cliente autenticado não deve ficar preso no ciclo de login.
-        header('Location: ../loja.php?acesso=negado');
+    if (($_SESSION['usuario_tipo'] ?? '') !== 'bibliotecario') {
+        header('Location: /index.php?acesso=negado');
         exit;
     }
 }

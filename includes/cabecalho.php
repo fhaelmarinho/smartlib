@@ -16,7 +16,14 @@ if (session_status() !== PHP_SESSION_ACTIVE){
     <a class="logo" href="/index.php">SMART<span>lib</span></a>
     <nav class="site-nav">
         <a href="/index.php">Início</a>
-        <a href="/auth/cadastro.php">Cadastrar</a>
-        <a href="/auth/login.php">Login</a>
+        <?php if (isset($_SESSION['usuario_id'])): ?>
+            <?php if (($_SESSION['usuario_tipo'] ?? '') === 'bibliotecario'): ?>
+                <a href="/admin/livros.php">Livros</a>
+            <?php endif; ?>
+            <a href="/auth/logout.php">Sair</a>
+        <?php else: ?>
+            <a href="/auth/cadastro.php">Cadastrar</a>
+            <a href="/auth/login.php">Login</a>
+        <?php endif; ?>
     </nav>
 </header>

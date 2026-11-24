@@ -6,42 +6,51 @@ $erro    = '';
 $sucesso = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nome  = trim($_POST['nome'] ?? '');
-    $email = trim($_POST['email'] ?? '');
-    $senha = $_POST['senha'] ?? '';
-    $confirmar_senha  = $_POST['confirmacao'] ?? '';
+    $nome            = trim($_POST['nome'] ?? '');
+    $matricula       = trim($_POST['matricula'] ?? '');
+    $email           = trim($_POST['email'] ?? '');
+    $senha           = $_POST['senha'] ?? '';
+    $confirmar_senha = $_POST['confirmacao'] ?? '';
 
-    // valida se o os campos estão preenchidos corretamente
-    if ($nome === '' OR $email === '' OR $senha === ''){
+    // valida se os campos estão preenchidos corretamente
+    if ($nome === '' || $matricula === '' || $email === '' || $senha === '') {
         $erro = 'Preencha todos os campos.';
 
-    }elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $erro = 'E-mail inválido.';
 
-    //cria a trava para que a senha tenha pelo menos 8 caracteres
-    }elseif(strlen($senha) < 8){
+    // cria a trava para que a senha tenha pelo menos 8 caracteres
+    } elseif (strlen($senha) < 8) {
         $erro = 'A senha deve ter pelo menos 8 caracteres.';
 
-    // cria a trava caso as senha e a confimação de senha não senha iguais    
-    }elseif($senha !== $confirmar_senha){
+    // cria a trava caso a senha e a confirmação de senha não sejam iguais    
+    } elseif ($senha !== $confirmar_senha) {
         $erro = 'As senhas não coincidem.';
 
-    }else{
-        $hash = password_hash($senha, PASSWORD_BCRYPT);
+    } else {
+        // Verifica se a matrícula ou o e-mail já estão cadastrados
+        $chk = $pdo->prepare('SELECT id FROM usuarios WHERE email = :e OR matricula = :m');
+        $chk->execute([':e' => $email, ':m' => $matricula]);
 
-        $stmt = $pdo->prepare(
-                'INSERT INTO usuarios (nome, email, senha, tipo)
-                VALUES (:nome, :email, :senha, "leitor")'
+        if ($chk->fetch()) {
+            $erro = 'Matrícula ou E-mail já cadastrado.';
+        } else {
+            $hash = password_hash($senha, PASSWORD_BCRYPT);
+
+            $stmt = $pdo->prepare(
+                'INSERT INTO usuarios (nome, matricula, email, senha, tipo)
+                 VALUES (:nome, :matricula, :email, :senha, "leitor")'
             );
-        $stmt->execute([
-                ':nome'  => $nome,
-                ':email' => $email,
-                ':senha' => $hash,
-                ':tipo'  => 'leitor',   // todo usuário criado vira leitor por padrão sem acesso ao cadastro de livros.
+            $stmt->execute([
+                ':nome'      => $nome,
+                ':matricula' => $matricula,
+                ':email'     => $email,
+                ':senha'     => $hash,
             ]);
 
             $sucesso = 'Cadastro realizado com sucesso! Faça seu login.';
-        }  
+        }
+    }
 }
 
 require __DIR__ . '/../includes/cabecalho.php';
@@ -65,6 +74,11 @@ require __DIR__ . '/../includes/cabecalho.php';
                     <input type="text" id="nome" name="nome"
                         value="<?= e($_POST['nome'] ?? '') ?>"
                         placeholder="Seu nome" required>
+
+                    <label for="matricula">Matrícula</label>
+                    <input type="text" id="matricula" name="matricula"
+                        value="<?= e($_POST['matricula'] ?? '') ?>"
+                        placeholder="Ex: 20260101" required>
 
                     <label for="email">E-mail</label>
                     <input type="email" id="email" name="email"
