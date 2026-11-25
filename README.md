@@ -1,6 +1,6 @@
 # SMART lib
 
-Projeto SMAR LIB - PI SENAC - Programador WEB.
+Projeto SMAR LIB - PI SENAC - Programador WEB (2026)
 
 ## Estrutura do Projeto
 
@@ -23,3 +23,4 @@ Projeto SMAR LIB - PI SENAC - Programador WEB.
 - `GitHub`
 - `Hostinger`
 - `URL:`      -     https://efficient-lightsteelblue-badger-09.hostingersite.com/
+
