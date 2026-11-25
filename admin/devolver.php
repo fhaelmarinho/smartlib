@@ -78,11 +78,11 @@ if ($busca !== '') {
         ORDER BY emp.data_prevista_devolucao ASC, emp.id DESC
     ');
     $stmt->execute([
-        ':b_nome'   => $like,
-        ':b_mat'    => $like,
-        ':b_email'  => $like,
+        ':b_nome' => $like,
+        ':b_mat' => $like,
+        ':b_email' => $like,
         ':b_titulo' => $like,
-        ':b_cod'    => $like,
+        ':b_cod'  => $like,
     ]);
     $emprestimosAtivos = $stmt->fetchAll();
 } else {
