@@ -15,7 +15,7 @@ Projeto SMAR LIB - PI SENAC - Programador WEB (2026)
 
 - `HTML5`
 - `CSS3`
-- `PHP 8.5.11`
+- `PHP 8.5.11`  -   Uso de PDO
 - `MySQL`
 
 ## Deploy
