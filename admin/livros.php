@@ -60,6 +60,7 @@ require_once __DIR__ . '/../includes/cabecalho.php';
             </div>
             <div class="admin-actions">
                 <a class="btn-emprestar" href="emprestar.php">-> Emprestar Livro</a>
+                <a class="btn-devolver" href="devolver.php"><- Devolver Livro</a>
                 <a class="btn-adicionar" href="formulario.php">+ Cadastrar Livro</a>
             </div>
         </div>
