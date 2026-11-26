@@ -9,7 +9,7 @@ if (session_status() !== PHP_SESSION_ACTIVE){
     session_start();
 }
 ?>
-    <link rel="stylesheet" href="/asset/css/style.css">
+    <link rel="stylesheet" href="/asset/css/style.css?v=2">
 </head>
 
 <header class="site-header">
