@@ -546,7 +546,7 @@ main {
     transform: translateY(-1px);
 }
 
-/* Botão Emprestar Livro */
+/* Botão Devolver Livro */
 .btn-devolver {
     display: inline-flex;
     align-items: center;
